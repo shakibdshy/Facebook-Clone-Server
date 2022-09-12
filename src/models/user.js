@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        min: 3,
+        max: 20,
+        unique: true
+    },
     name: {
         type: String,
         required: true
@@ -12,12 +19,29 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        min: 6
     },
-    image: {
+    profile_Picture: {
         type: String,
         default: ""
-    }
+    },
+    cover_Picture: {
+        type: String,
+        default: ""
+    },
+    followers: {
+        type: Array,
+        default: [],
+    },
+    followings: {
+        type: Array,
+        default: [],
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
 }, { timestamps: true });
 
 export const User = mongoose.model("User", userSchema);
