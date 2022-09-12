@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import userRouter from './routes/users.routes.js';
 
 const app = express();
 dotenv.config();
@@ -24,6 +25,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
+app.use("/api/users", userRouter)
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;
